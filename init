@@ -1,0 +1,54 @@
+--init
+function _init()
+ cls()
+ --memory location for mouse
+	poke(24365,1)
+ music(0)
+ init_selector()
+ init_rabbits(88,40)
+	custom_menu()
+ frame_nb=0
+ sec_nb=0
+end
+
+
+function custom_menu()
+ menuitem(1,"set speed",
+	 function()
+	 	sfx(0)
+	 end
+	 )
+	 menuitem(2,"set starving",
+	 function()
+	 	sfx(0)
+	 end
+ )
+end
+
+
+function init_selector()
+ selector = {
+	 sprite=112,
+	 x=64,
+	 y=64
+	}
+end
+
+
+function init_rabbits(_x,_y)
+ // todo
+ // add dict in dict 
+ // for entities
+ rabbit = {
+	 sprite=80,
+	 flip=false,
+	 x=_x,
+	 y=_y,
+	 destination={x=_x,y=_y},
+	 speed=0.1,
+	 courage=20
+	}
+	grid_size = 8
+	info = {i=0}
+end
+
