@@ -1,0 +1,104 @@
+--movements
+function	move()
+	if rabbit.y > rabbit.destination.y
+	then
+  move_up()
+ end
+	if rabbit.y < rabbit.destination.y
+	then
+  move_down()
+ end
+ if rabbit.x > rabbit.destination.x
+	then
+  move_left()
+ end
+	if rabbit.x < rabbit.destination.x
+	then
+  move_right()
+ end
+end
+
+
+function move_left()
+ if not blocked(
+  flr(rabbit.x-rabbit.speed),
+  flr(rabbit.y)
+ )
+ then
+	 rabbit.x -= rabbit.speed
+	end
+end
+
+
+function move_right()
+	if not blocked(
+  ceil(rabbit.x+rabbit.speed),
+  flr(rabbit.y)
+ )
+ then
+	rabbit.x += rabbit.speed
+ end
+end
+	
+
+function move_up()
+	if not blocked(
+  flr(rabbit.x),
+  flr(rabbit.y - rabbit.speed)
+ )
+ then
+	rabbit.y -= rabbit.speed
+ end
+end
+
+
+function move_down()
+	if not blocked(
+  flr(rabbit.x),
+  ceil(rabbit.y + rabbit.speed)
+ )
+ then
+	rabbit.y += rabbit.speed
+ end
+end
+
+
+function blocked(x,y)
+  i = flr(x/grid_size)
+  j = ceil(y/grid_size-1)
+  info.i = x
+  info.j = y
+	 spr_nb = mget(i-1,j)
+	 if fget(spr_nb,4)
+		 then return true
+		 else
+   i = ceil(x/grid_size)
+	  spr_nb = mget(i-1,j)
+			if fget(spr_nb,4)
+		 	then return true
+		 end
+		end
+end
+	 
+	 
+function set_facing(entity)
+	if entity.facing == "left"
+	 then
+	 entity.sprite = 80
+	 entity._flip = false
+	end
+	if entity.facing == "right"
+	 then
+	 entity.sprite = 81
+	 entity._flip = true
+	end
+	if entity.facing == "up"
+	 then
+	 entity.sprite = 83
+	end
+	if entity.facing == "down"
+	 then
+	 entity.sprite = 82
+	end
+end
+
