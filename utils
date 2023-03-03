@@ -1,0 +1,4 @@
+--utils
+function rndg(n)
+ return flr(rnd(n)-flr(rnd(n)))
+end
