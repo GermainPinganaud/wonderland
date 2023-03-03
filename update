@@ -1,0 +1,75 @@
+--update
+function _update60()
+ set_direction()
+ mouse_handling()
+ move(rabbit)
+ frame_nb = (frame_nb+1) % 60
+ sec_nb = (sec_nb+1) % 60
+ if frame_nb == 0
+	 then sec_nb += 1 
+	 if sec_nb % 5 == 0
+		 then set_destination(rabbit)
+		end
+	end
+end
+
+
+mouse_clk=0--click states globals
+function mouse_handling()
+	mouse={
+		x=stat(32)-13,
+		y=stat(33)-15,
+		buttons=stat(34),
+		p=false,   --pressed
+		w=stat(36),--wheel
+		m=stat(37),--movement
+		xs=(stat(32)\8*8),--snapx
+		ys=(stat(33)\8*8),--snapy
+	}
+	--set mouse click true/false--
+	if mouse.buttons>0
+	and mouse_clk<1
+	 then
+	  mouse.p=true
+   interact(mouse)
+	 else mouse.p=false
+	end
+	--add to the mouse click--
+	if mouse.buttons>0
+	 then  mouse_clk+=1
+	 else  mouse_clk=0
+	end
+end
+
+
+function interact(mouse)
+	sfx(0)
+end
+
+
+function set_destination(rabbit)
+	x_vector=rndg(rabbit.courage)
+	y_vector=rndg(rabbit.courage)
+	if abs(x_vector) > abs(y_vector)
+	then
+	 if x_vector < 0
+		 then rabbit.facing = "left"
+		 else rabbit.facing = "right"
+	 end
+	else
+	 if y_vector < 0
+		 then rabbit.facing = "up"
+		 else rabbit.facing = "down"
+	 end
+	end
+	
+	rabbit.destination = {
+		x=flr(rabbit.x+x_vector),
+		y=flr(rabbit.y+y_vector)
+	}
+end
+
+
+function set_direction(rabbit)
+	sfx(0)
+end
