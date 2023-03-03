@@ -1,0 +1,77 @@
+--draw
+function _draw()
+ cls()
+ map(0,0,8,8)
+ draw_entities()
+	draw_cursor()
+	pset(
+		rabbit.destination.x,
+		rabbit.destination.y,
+		8)
+	pset(
+		rabbit.x,
+		rabbit.y,
+		12)
+	print(rabbit.destination.x)
+	print(rabbit.destination.y)
+ if frame_nb == 1
+ then info.rnd = rndg(6)
+ end
+end
+
+
+function draw_cursor()
+	spr(mouse.buttons,
+	 stat(32)-16,
+	 stat(33)-16
+	)
+end
+
+
+function draw_entities()
+  draw_entity(rabbit)
+end
+
+
+function draw_entity(entity)
+ set_facing(entity)
+ if is_hovered(entity)
+ then
+	 pal(6,0)--lgrey to white
+	 pal(13,0)--dgrey to lgrey
+	 pal(1,0)--eye to lgrey
+ end
+ if mouse.p==true
+ and is_hovered(entity)
+ then
+  entity.state="clicked"
+  pal()
+	 pal(6,7)--lgrey to white
+	 pal(13,7)--dgrey to white
+	 pal(1,7)--eye to white
+ end
+ spr(
+		entity.sprite,
+		entity.x,
+		entity.y,
+		1,1,
+		entity._flip)
+ pal()
+end
+
+
+function is_hovered(entity)
+ if mouse.x >= entity.x
+ and mouse.x <= entity.x +8
+ and mouse.y >= entity.y 
+ and mouse.y <= entity.y +8
+	then
+		return true
+ end
+ 
+end
+
+
+function print_info()
+ print(info.rnd)
+end
